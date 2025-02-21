@@ -19,8 +19,11 @@ if __name__ == '__main__':
 
     # Create  regression objects.
     # 1. Standard weighted regression (explicit mode, no outlier rejection)
+    import time
+    t = time.time()
     ewm_lr_standard = LinearRegression(alpha=0.05, adjust=True, min_periods=20)
     slopes_std, intercepts_std, r2_std = ewm_lr_standard.regress(x, y)
+    print("Standard execution time:", time.time() - t)
 
     # 2. Robust regression using RANSAC
     import time
@@ -28,7 +31,7 @@ if __name__ == '__main__':
     ewm_lr_ransac = LinearRegression(alpha=0.05, adjust=True, min_periods=20,
                                           outlier_method='ransac', ransac_iterations=200, ransac_threshold=2.5)
     slopes_ransac, intercepts_ransac, r2_ransac = ewm_lr_ransac.regress(x, y)
-    print(time.time() - t)
+    print("RANSAC execution time:", time.time() - t)
 
     # Plot the evolution of slope estimates.
     plt.figure(figsize=(12, 5))
