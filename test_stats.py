@@ -1,12 +1,11 @@
 import unittest
 import numpy as np
 from ewm_utils import RollingStats
+import pandas as pd
 
-# --- Unit Tests ---
+# Unit test that verifies against Pandas implementation
 
 if __name__ == '__main__':
-    import pandas as pd
-    import unittest
 
     class TestRollingStats(unittest.TestCase):
         def setUp(self):
