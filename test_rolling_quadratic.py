@@ -1,9 +1,10 @@
 import numpy as np
 from ewm_utils import RollingQuadraticRegression
+import matplotlib.pyplot as plt
+import time
 
 # Example usage:
 if __name__ == '__main__':
-    import matplotlib.pyplot as plt
 
     # Create a rolling  quadratic regression object.
     # For explicit mode with RANSAC robust regression.
@@ -30,7 +31,9 @@ if __name__ == '__main__':
     c_list = []
 
     for xi, yi in zip(xs, ys):
+        t = time.time()
         a, b, c, r2 = ewmlr.update(xi, yi)
+        print(f"RANSAC quadratic rolling update took {time.time() - t} sec")
         a_list.append(a)
         b_list.append(b)
         c_list.append(c)

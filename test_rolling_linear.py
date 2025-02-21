@@ -1,5 +1,6 @@
 import numpy as np
 from ewm_utils import RollingLinearRegression
+import time
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
@@ -24,7 +25,9 @@ if __name__ == '__main__':
     ewmlr = RollingLinearRegression(alpha=0.05, adjust=True, min_periods=20,
                                        outlier_method='ransac', ransac_iterations=200, ransac_threshold=2.5)
     for xi, yi in zip(x, y):
+        t = time.time()
         slope, intercept, r2 = ewmlr.update(xi, yi)
+        print(f"RANSAC quadratic rolling update took {time.time() - t} sec")
         slopes.append(slope)
         intercepts.append(intercept)
         r2_values.append(r2)
