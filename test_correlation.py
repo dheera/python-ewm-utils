@@ -1,16 +1,17 @@
 import numpy as np
 from ewm_utils import RollingCorrelation
 import unittest
+import pandas as pd
 
-# Unit test for RollingCorr
-class TestRollingCorr(unittest.TestCase):
+# Unit test for rolling correlation that verifies against Pandas implementation
+
+class TestRollingCorrelation(unittest.TestCase):
     def setUp(self):
         self.alpha = 0.1
         self.min_periods = 5
         np.random.seed(42)  # for reproducibility
 
     def _run_trial(self, adjust_flag):
-        import pandas as pd
         # Create a random data series of length between 50 and 150.
         n = np.random.randint(50, 151)
         x_vals = np.random.randn(n)
@@ -18,7 +19,7 @@ class TestRollingCorr(unittest.TestCase):
         y_vals = 0.5 * x_vals + np.random.randn(n) * 0.5
 
         # Initialize our rolling  correlation.
-        rolling_corr = RollingCorr(alpha=self.alpha, adjust=adjust_flag, min_periods=self.min_periods)
+        rolling_corr = RollingCorrelation(alpha=self.alpha, adjust=adjust_flag, min_periods=self.min_periods)
 
         # Collect rolling correlation results.
         rolling_results = []
